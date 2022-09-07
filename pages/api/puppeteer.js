@@ -1,4 +1,3 @@
-const puppeteer = require("puppeteer");
 const chrome = require("chrome-aws-lambda");
 
 export default async function handler(req, res) {
