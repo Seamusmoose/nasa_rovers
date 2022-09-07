@@ -7,6 +7,8 @@ const MarsWeather = () => {
     const fetchWeatherData = async () => {
       const res = await fetch(`/api/puppeteer`);
 
+      console.log(res);
+
       if (!res.ok) {
         console.error(await res.json());
         return;
