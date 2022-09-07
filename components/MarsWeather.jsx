@@ -10,10 +10,10 @@ const MarsWeather = () => {
       console.log(res);
       console.log(weatherData, "WD");
 
-      if (!res.ok) {
-        console.error(await res.json());
-        return;
-      }
+      // if (!res.ok) {
+      //   console.error(await res.json());
+      //   return;
+      // }
 
       const data = await res.json();
       setWeatherData(data);
