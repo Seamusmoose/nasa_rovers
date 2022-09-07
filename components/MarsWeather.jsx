@@ -8,6 +8,7 @@ const MarsWeather = () => {
       const res = await fetch(`/api/puppeteer`);
 
       console.log(res);
+      console.log(weatherData, "WD");
 
       if (!res.ok) {
         console.error(await res.json());
