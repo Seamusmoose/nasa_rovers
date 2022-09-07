@@ -1,28 +1,13 @@
-let chrome = {};
-let puppeteer;
-
-if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-  chrome = require("chrome-aws-lambda");
-  puppeteer = require("puppeteer-core");
-} else {
-  puppeteer = require("puppeteer");
-}
+// const puppeteer = require("puppeteer-core");
+const chrome = require("chrome-aws-lambda");
 
 export default async function handler(req, res) {
-  let options = {};
-
-  if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-    options = {
-      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
-      defaultViewport: chrome.defaultViewport,
+  try {
+    const browser = await chrome.puppeteer.launch({
+      args: chrome.args,
       executablePath: await chrome.executablePath,
       headless: true,
-      ignoreHTTPSErrors: true,
-    };
-  }
-
-  try {
-    const browser = await puppeteer.launch(options);
+    });
 
     const aboutBlankPage = (await browser.pages())[0];
     if (aboutBlankPage) {
@@ -51,7 +36,7 @@ export default async function handler(req, res) {
     });
 
     console.log(nasaWeatherDataScrape, "in");
-    res.send(nasaWeatherDataScrape);
+    res.json(nasaWeatherDataScrape);
 
     const newPage = (await browser.pages())[0];
     await newPage.close();
