@@ -4,7 +4,6 @@ export default async function handler(req, res) {
   try {
     const browser = await puppeteer.launch({
       headless: true,
-      args: ["--no-sandbox"],
     });
 
     const aboutBlankPage = (await browser.pages())[0];
