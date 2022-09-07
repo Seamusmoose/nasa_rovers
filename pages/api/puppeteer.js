@@ -1,14 +1,28 @@
-import chromium from "chrome-aws-lambda";
+let chrome = {};
+let puppeteer;
+
+if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+  chrome = require("chrome-aws-lambda");
+  puppeteer = require("puppeteer-core");
+} else {
+  puppeteer = require("puppeteer");
+}
 
 export default async function handler(req, res) {
-  try {
-    const browser = await chromium.puppeteer.launch({
-      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath,
+  let options = {};
+
+  if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+    options = {
+      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
+      defaultViewport: chrome.defaultViewport,
+      executablePath: await chrome.executablePath,
       headless: true,
       ignoreHTTPSErrors: true,
-    });
+    };
+  }
+
+  try {
+    const browser = await puppeteer.launch(options);
 
     const aboutBlankPage = (await browser.pages())[0];
     if (aboutBlankPage) {
