@@ -18,6 +18,9 @@
     "react-dom": "18.2.0",
     "react-router-dom": "^6.3.0"
   },
+  "engines": {
+    "node": "^14"
+  },
   "devDependencies": {
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5",
