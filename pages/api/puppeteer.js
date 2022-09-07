@@ -1,10 +1,11 @@
 const puppeteer = require("puppeteer-core");
-// const chrome = require("chrome-aws-lambda");
+const chrome = require("chrome-aws-lambda");
 
 export default async function handler(req, res) {
   try {
-    const browser = await puppeteer.launch({
-      ignoreDefaultArgs: ["--disable-extensions"],
+    const browser = await chrome.puppeteer.launch({
+      args: chrome.args,
+      executablePath: await chrome.executablePath,
       headless: true,
     });
 
