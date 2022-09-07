@@ -1,11 +1,13 @@
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
+const chrome = require("chrome-aws-lambda");
 
 export default async function handler(req, res) {
   try {
     const browser = await puppeteer.launch({
-      ignoreDefaultArgs: ["--disable-extensions"],
+      args: chrome.args,
+      executablePath: await chrome.executablePath,
+      headless: chrome.headless,
       headless: true,
-      args: ["--no-sandbox"],
     });
 
     const aboutBlankPage = (await browser.pages())[0];
