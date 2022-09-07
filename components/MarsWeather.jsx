@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 const MarsWeather = () => {
   const [weatherData, setWeatherData] = useState([]);
 
-  console.log(weatherData, "asdfasfas");
 
   useEffect(() => {
     const fetchWeatherData = async () => {

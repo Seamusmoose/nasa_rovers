@@ -21,7 +21,7 @@ const MarsRover = () => {
   const [earthDate, earthDateSet] = useState("");
 
   const [manifestsData, manifestsDataSet] = useState();
-  
+
   useEffect(() => {
     async function handleAsync() {
       if (typeof selectedRover === "undefined") {
