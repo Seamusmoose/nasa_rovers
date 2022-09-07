@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-
 const MarsWeather = () => {
   const [weatherData, setWeatherData] = useState([]);
 
-
   useEffect(() => {
     const fetchWeatherData = async () => {
-     const res = await fetch(`/api/puppeteer`)   
-     const data = await res.json()
-        setWeatherData(data);
+      const res = await fetch(`/api/puppeteer`);
+
+      if (!res.ok) {
+        console.error(await res.json());
+        return;
+      }
+
+      const data = await res.json();
+      setWeatherData(data);
     };
 
     fetchWeatherData();
@@ -20,8 +24,6 @@ const MarsWeather = () => {
   weatherData.forEach((item) => {
     weatherDataResult.push([...Object.entries(item)]);
   });
-
-
 
   return (
     <>
