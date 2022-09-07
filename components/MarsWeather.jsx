@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 
 const MarsWeather = () => {
   const [weatherData, setWeatherData] = useState([]);
 
-  console.log(weatherData);
+  console.log(weatherData, "asdfasfas");
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const { data } = await axios.get("/weather");
-      setWeatherData(data);
+     const res = await fetch(`/api/puppeteer`)   
+     const data = await res.json()
+        setWeatherData(data);
     };
 
     fetchWeatherData();

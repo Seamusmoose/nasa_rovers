@@ -5,6 +5,8 @@ import { useState } from "react";
 import Layout from "../components/Layout";
 import NavBar from "../components/NavBar";
 import MarsRover from "../components/MarsRover";
+import MarsWeather from "../components/MarsWeather";
+
 
 export default function Home({}) {
   const [isShow, setIsShow] = useState(false);
@@ -25,7 +27,7 @@ export default function Home({}) {
         >
           <button onClick={() => setIsShow(false)}>close</button>
 
-          {/* <div className="weather__container">{<MarsWeather />}</div> */}
+          <div className="weather__container">{<MarsWeather />}</div>
         </div>
       </Layout>
     </>
