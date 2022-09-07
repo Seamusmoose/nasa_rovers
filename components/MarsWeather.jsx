@@ -29,7 +29,7 @@ const MarsWeather = () => {
 
   return (
     <>
-      {/* <h1>Last recorded Mars Weather with Curiosty Rover</h1> */}
+      <h1>Last recorded Mars Weather with Curiosty Rover</h1>
 
       {weatherData.length === 0 ? (
         <h1>...Loading</h1>

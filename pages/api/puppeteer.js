@@ -1,10 +1,14 @@
-// const puppeteer = require("puppeteer-core");
 const chrome = require("chrome-aws-lambda");
 
 export default async function handler(req, res) {
   try {
     const browser = await chrome.puppeteer.launch({
-      args: chrome.args,
+      args: [
+        "--headless",
+        "--hide-scrollbars",
+        "--mute-audio",
+        "--disable-gl-drawing-for-tests",
+      ],
       executablePath: await chrome.executablePath,
       headless: true,
     });
@@ -19,6 +23,7 @@ export default async function handler(req, res) {
 
     const nasaWeatherDataScrape = await page.evaluate(() => {
       let items = [...document.querySelectorAll(".item")];
+
       return items.map((item) => {
         const newMap = new Map();
         newMap["Sol"] = item.childNodes[0].innerText.split(" ").pop();
