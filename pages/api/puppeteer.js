@@ -1,9 +1,9 @@
-const chromium = require("chrome-aws-lambda");
+import chromium from "chrome-aws-lambda";
 
 export default async function handler(req, res) {
   try {
     const browser = await chromium.puppeteer.launch({
-      args: chromium.args,
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath,
       headless: true,
