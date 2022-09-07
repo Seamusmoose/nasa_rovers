@@ -4,6 +4,7 @@ export default async function handler(req, res) {
   try {
     const browser = await puppeteer.launch({
       headless: true,
+      executablePath: await chromium.executablePath,
     });
 
     const aboutBlankPage = (await browser.pages())[0];
