@@ -21,7 +21,7 @@ const RoverCard = ({ earthDate, id, camera, image, sol }) => {
 
       <div>
         <Modal open={modalIsOpen} onClose={closeCard}>
-          <h3>{earthDate}</h3>
+          <h3>{earthDate}d</h3>
           <h3>{sol}</h3>
           <h3>{id}</h3>
           <h4>{camera}</h4>
