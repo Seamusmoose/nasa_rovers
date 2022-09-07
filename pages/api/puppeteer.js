@@ -51,7 +51,7 @@ export default async function handler(req, res) {
     });
 
     console.log(nasaWeatherDataScrape, "in");
-    res.send(nasaWeatherDataScrape);
+    res.json(nasaWeatherDataScrape);
 
     const newPage = (await browser.pages())[0];
     await newPage.close();
