@@ -1,46 +1,73 @@
 const chrome = require("chrome-aws-lambda");
 
 export default async function handler(req, res) {
+  const minimal_args = [
+    "--autoplay-policy=user-gesture-required",
+    "--disable-background-networking",
+    "--disable-background-timer-throttling",
+    "--disable-backgrounding-occluded-windows",
+    "--disable-breakpad",
+    "--disable-client-side-phishing-detection",
+    "--disable-component-update",
+    "--disable-default-apps",
+    "--disable-dev-shm-usage",
+    "--disable-domain-reliability",
+    "--disable-extensions",
+    "--disable-features=AudioServiceOutOfProcess",
+    "--disable-hang-monitor",
+    "--disable-ipc-flooding-protection",
+    "--disable-notifications",
+    "--disable-offer-store-unmasked-wallet-cards",
+    "--disable-popup-blocking",
+    "--disable-print-preview",
+    "--disable-prompt-on-repost",
+    "--disable-renderer-backgrounding",
+    "--disable-setuid-sandbox",
+    "--disable-speech-api",
+    "--disable-sync",
+    "--hide-scrollbars",
+    "--ignore-gpu-blacklist",
+    "--metrics-recording-only",
+    "--mute-audio",
+    "--no-default-browser-check",
+    "--no-first-run",
+    "--no-pings",
+    "--no-sandbox",
+    "--no-zygote",
+    "--password-store=basic",
+    "--use-gl=swiftshader",
+    "--use-mock-keychain",
+  ];
   try {
     const browser = await chrome.puppeteer.launch({
-      args: [
-        "--headless",
-        "--hide-scrollbars",
-        "--mute-audio",
-        "--disable-gl-drawing-for-tests",
-      ],
+      args: minimal_args,
       executablePath: await chrome.executablePath,
       headless: true,
     });
 
-    // const aboutBlankPage = (await browser.pages())[0];
-    // if (aboutBlankPage) {
-    //   await aboutBlankPage.close();
-    // }
+    const aboutBlankPage = (await browser.pages())[0];
+    if (aboutBlankPage) {
+      await aboutBlankPage.close();
+    }
 
-    const page = (await browser.pages())[0];
+    const page = await browser.newPage();
     await page.goto("https://mars.nasa.gov/msl/weather/");
 
     const nasaWeatherDataScrape = await page.evaluate(() => {
-      let items = [...document.querySelectorAll(".item")];
-      return items.map((item) => {
-        const newMap = new Map();
-        newMap["Sol"] = item.childNodes[0].innerText.split(" ").pop();
-        newMap["Date"] = item.childNodes[1].innerText;
-        newMap["High"] = item.childNodes[4].innerText
-          .split("C")[0]
-          .split(" ")
-          .pop();
-        newMap["Low"] = item.childNodes[4].innerText
-          .split("C")[1]
-          .split(" ")
-          .pop();
-        return newMap;
-      });
+      const high = Array.from(document.querySelectorAll(".celsius .high")).map(
+        (x) => x.innerText
+      );
+      const low = Array.from(document.querySelectorAll(".celsius .low")).map(
+        (x) => x.innerText
+      );
+      return {
+        high,
+        low,
+      };
     });
 
     console.log(nasaWeatherDataScrape, "in");
-    res.send(nasaWeatherDataScrape);
+    res.json(nasaWeatherDataScrape);
 
     const newPage = (await browser.pages())[0];
     await newPage.close();
