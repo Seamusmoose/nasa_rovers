@@ -7,7 +7,6 @@ import NavBar from "../components/NavBar";
 import MarsRover from "../components/MarsRover";
 import MarsWeather from "../components/MarsWeather";
 
-
 export default function Home({}) {
   const [isShow, setIsShow] = useState(false);
 

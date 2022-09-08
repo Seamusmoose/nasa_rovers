@@ -89,7 +89,13 @@
   border: solid;
   padding: 2rem;
   border: 2px solid black;
+  background-color: lightblue;
   border-radius: 300px;
+}
+
+.weather-item li {
+  text-decoration: none;
+  list-style: none;
 }
 
 .popup {

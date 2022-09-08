@@ -5,7 +5,7 @@ const MarsWeather = () => {
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const res = await fetch(`/api/puppeteer`);
+      const res = await fetch(`/api/weatherAPI`);
 
       if (!res.ok) {
         console.error(await res.json());
@@ -13,6 +13,7 @@ const MarsWeather = () => {
       }
 
       const data = await res.json();
+      console.log(data.soles, "sol");
       setWeatherData(data);
     };
 
@@ -21,12 +22,6 @@ const MarsWeather = () => {
 
   console.log(weatherData, "WD");
 
-  let weatherDataResult = [];
-
-  weatherData.forEach((item) => {
-    weatherDataResult.push([...Object.entries(item)]);
-  });
-
   return (
     <>
       {/* <h1>Last recorded Mars Weather with Curiosty Rover</h1> */}
@@ -34,16 +29,38 @@ const MarsWeather = () => {
       {weatherData.length === 0 ? (
         <h1>...Loading</h1>
       ) : (
-        weatherDataResult.map((item, i) => {
-          return (
-            <div key={i} className="weather-item">
-              <h3>{item[0].join(": ")}</h3>
-              <h3>{item[1].join(": ")}</h3>
-              <h3>{item[2].join(": ")}</h3>
-              <h3>{item[3].join(": ")}</h3>
-            </div>
-          );
-        })
+        weatherData.map(
+          ({
+            id,
+            sol,
+            terrestrial_date,
+            season,
+            min_temp,
+            max_temp,
+            pressure,
+            wind_speed,
+            wind_direction,
+            atmo_opacity,
+            sunrise,
+            sunset,
+            min_gts_temp,
+            max_gts_temp,
+
+
+          }) => {
+            return (
+              <ul key={id} className="weather-item">
+                
+                <li>Earth date: {terrestrial_date}</li>
+                <li>Sol Date: {sol}</li>
+                <li>min temp: {min_temp}</li>
+                <li>Max temp: {max_temp}</li>
+                <li>sunrise: {sunrise}</li>
+                <li>sunset: {sunset}</li>
+              </ul>
+            );
+          }
+        )
       )}
     </>
   );
