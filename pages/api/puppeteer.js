@@ -8,37 +8,21 @@ export default async function handler(req, res) {
         "--hide-scrollbars",
         "--mute-audio",
         "--disable-gl-drawing-for-tests",
-        "--disable-canvas-aa",
-        "--disable-2d-canvas-clip-aa",
-        "--disable-gl-drawing-for-tests",
-        "--disable-dev-shm-usage",
-        "--no-zygote",
-        "--use-gl=swiftshader",
-        "--hide-scrollbars",
-        "--mute-audio",
-        "--no-first-run",
-        "--disable-infobars",
-        "--disable-breakpad",
-        "--window-size=1280,1024",
-        "--user-data-dir=./chromeData",
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
       ],
       executablePath: await chrome.executablePath,
       headless: true,
     });
 
-    const aboutBlankPage = (await browser.pages())[0];
-    if (aboutBlankPage) {
-      await aboutBlankPage.close();
-    }
+    // const aboutBlankPage = (await browser.pages())[0];
+    // if (aboutBlankPage) {
+    //   await aboutBlankPage.close();
+    // }
 
-    const page = await browser.newPage();
+    const page = (await browser.pages())[0];
     await page.goto("https://mars.nasa.gov/msl/weather/");
 
     const nasaWeatherDataScrape = await page.evaluate(() => {
       let items = [...document.querySelectorAll(".item")];
-
       return items.map((item) => {
         const newMap = new Map();
         newMap["Sol"] = item.childNodes[0].innerText.split(" ").pop();

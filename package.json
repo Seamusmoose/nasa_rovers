@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
     "chrome-aws-lambda": "^6.0.0",
     "html-to-text": "^8.2.1",
     "next": "12.2.5",
