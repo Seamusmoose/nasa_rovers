@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import RoverCard from "./RoverCard";
+import { DayPicker, DayClickEventHandler } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
 const camerasList = [
   "FHAZ",
@@ -19,7 +21,7 @@ const MarsRover = () => {
   const [selectedRover, selectedRoverSet] = useState(currentRovers[0]);
 
   const [earthDate, earthDateSet] = useState("");
-
+  console.log(earthDate);
   const [manifestsData, manifestsDataSet] = useState();
 
   useEffect(() => {
@@ -110,9 +112,37 @@ const MarsRover = () => {
     }
   };
 
+  const disabledDays = [
+    {
+      from: new Date(-8640000000000000),
+      to: new Date(getRoverDateMin()),
+    },
+    {
+      from: new Date(getRoverDateMax()),
+      to: new Date(`December 22, 9999 04:00:00`),
+    },
+  ];
+
   const dataForRender = [
     ...roverData.filter((el) => el.camera.name === selectedCamera),
   ];
+
+  const [selectedDay, setSelectedDay] = useState(earthDate);
+
+  const handleDayClick = (day) => {
+    const localConversion = new Date(
+      day.getTime() - day.getTimezoneOffset() * 60000
+    );
+    setSelectedDay(localConversion.toISOString().slice(0, 10));
+    earthDateSet(localConversion.toISOString().slice(0, 10));
+  };
+  // console.log(selectedDay);
+
+  // const footer = selectedDay ? (
+  //   <p>You selected {selectedDay.toDateString()}.</p>
+  // ) : (
+  //   <p>Please pick a day.</p>
+  // );
 
   return (
     <div className="RoverImages__Container">
@@ -128,7 +158,6 @@ const MarsRover = () => {
           </option>
         ))}
       </select>
-
       <select
         name="camera-select"
         value={selectedCamera}
@@ -141,14 +170,22 @@ const MarsRover = () => {
           </option>
         ))}
       </select>
-
-      <input
+      {/* <input
         name="date"
         type="date"
         min={getRoverDateMin()}
         max={getRoverDateMax()}
         value={earthDate}
         onChange={(e) => earthDateSet(e.currentTarget.value)}
+      /> */}
+
+      <DayPicker
+        mode="single"
+        utcOffset={0}
+        dateFormat="DD-MMM HH:mm"
+        onDayClick={handleDayClick}
+        disabled={disabledDays}
+        // footer={footer}
       />
 
       <div className="grid__container">
