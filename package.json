@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "chrome-aws-lambda": "^8.0.2",
-    "date-fns": "^2.29.2",
+    "date-fns": "^2.0.0-beta.5",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-day-picker": "^8.2.1",

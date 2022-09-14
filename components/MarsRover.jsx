@@ -2,26 +2,16 @@ import { useState, useEffect } from "react";
 import RoverCard from "./RoverCard";
 import { DayPicker, DayClickEventHandler } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { parseISO, format, addMonths, isSameMonth } from "date-fns";
 
-const camerasList = [
-  "FHAZ",
-  "RHAZ",
-  "MAST",
-  "CHEMCAM",
-  "MAHLI",
-  "MARDI",
-  "NAVCAM",
-  "PANCAM",
-  "MINITES",
-];
 const size = 48;
 const currentRovers = ["Curiosity", "Opportunity", "Spirit"];
 
 const MarsRover = () => {
   const [selectedRover, selectedRoverSet] = useState(currentRovers[0]);
 
-  const [earthDate, earthDateSet] = useState("");
-  console.log(earthDate);
+  const [earthDate, earthDateSet] = useState("2021-10-06");
+  // console.log(earthDate, "erde");
   const [manifestsData, manifestsDataSet] = useState();
 
   useEffect(() => {
@@ -127,8 +117,18 @@ const MarsRover = () => {
     ...roverData.filter((el) => el.camera.name === selectedCamera),
   ];
 
-  const [selectedDay, setSelectedDay] = useState(earthDate);
 
+  const currentPropsDate = addMonths(new Date(earthDate), 1);
+
+  console.log(earthDate);
+  const [month, setMonth] = useState(currentPropsDate);
+  const [selectedDay, setSelectedDay] = useState();
+
+  useEffect(() => {
+    setMonth(currentPropsDate);
+  }, [earthDateSet]);
+
+  
   const handleDayClick = (day) => {
     const localConversion = new Date(
       day.getTime() - day.getTimezoneOffset() * 60000
@@ -136,13 +136,6 @@ const MarsRover = () => {
     setSelectedDay(localConversion.toISOString().slice(0, 10));
     earthDateSet(localConversion.toISOString().slice(0, 10));
   };
-  // console.log(selectedDay);
-
-  // const footer = selectedDay ? (
-  //   <p>You selected {selectedDay.toDateString()}.</p>
-  // ) : (
-  //   <p>Please pick a day.</p>
-  // );
 
   return (
     <div className="RoverImages__Container">
@@ -185,6 +178,9 @@ const MarsRover = () => {
         dateFormat="DD-MMM HH:mm"
         onDayClick={handleDayClick}
         disabled={disabledDays}
+        month={month}
+        onMonthChange={setMonth}
+
         // footer={footer}
       />
 
