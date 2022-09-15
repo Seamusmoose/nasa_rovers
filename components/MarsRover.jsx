@@ -117,18 +117,16 @@ const MarsRover = () => {
     ...roverData.filter((el) => el.camera.name === selectedCamera),
   ];
 
+  const currentPropsDate = new Date(earthDate);
 
-  const currentPropsDate = addMonths(new Date(earthDate), 1);
-
-  console.log(earthDate);
-  const [month, setMonth] = useState(currentPropsDate);
-  const [selectedDay, setSelectedDay] = useState();
+  console.log(new Date(earthDate), "ghdf");
+  const [month, setMonth] = useState();
+  // const [selectedDay, setSelectedDay] = useState(currentPropsDate);
 
   useEffect(() => {
     setMonth(currentPropsDate);
-  }, [earthDateSet]);
+  }, [earthDate]);
 
-  
   const handleDayClick = (day) => {
     const localConversion = new Date(
       day.getTime() - day.getTimezoneOffset() * 60000
@@ -178,6 +176,8 @@ const MarsRover = () => {
         dateFormat="DD-MMM HH:mm"
         onDayClick={handleDayClick}
         disabled={disabledDays}
+        // selected={selectedDay}
+        // onSelect={setSelectedDay}
         month={month}
         onMonthChange={setMonth}
 
