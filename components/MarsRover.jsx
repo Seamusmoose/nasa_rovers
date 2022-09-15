@@ -121,7 +121,7 @@ const MarsRover = () => {
 
   console.log(new Date(earthDate), "ghdf");
   const [month, setMonth] = useState();
-  // const [selectedDay, setSelectedDay] = useState(currentPropsDate);
+  const [selectedDay, setSelectedDay] = useState();
 
   useEffect(() => {
     setMonth(currentPropsDate);
