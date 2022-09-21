@@ -19,7 +19,10 @@ const Navigator = ({
 }) => {
   return (
     <>
-      <PlanetAnimation scrolle={scrolle} />
+    <div className={styles.animation_container}>
+    <PlanetAnimation scrolle={scrolle} />
+    </div>
+    
       <select
         name="rover-select"
         value={selectedRover}

@@ -91,13 +91,23 @@ select {
   z-index: 1;
   background-color: white;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
 }
 
 .sidebar.fixed {
   position: sticky;
   top: 6%;
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
   z-index: 1;
   background-color: white;
   height: 100vh;
+}
+
+.weather_grid {
+  display: grid;
 }

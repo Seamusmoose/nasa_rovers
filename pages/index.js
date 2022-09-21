@@ -12,9 +12,6 @@ import RoverCard from "../components/RoverCard";
 import styles from "../styles/index.module.css";
 
 export default function Home() {
-  const [isShow, setIsShow] = useState(false);
-
-  const size = 48;
   const currentRovers = ["Curiosity", "Opportunity", "Spirit"];
   const [selectedRover, selectedRoverSet] = useState(currentRovers[0]);
 
@@ -141,24 +138,30 @@ export default function Home() {
   }, [earthDate]);
 
   const [scrolle, setScrolle] = useState(0);
+  const [fix, setFix] = useState(false);
 
   const handleScroll = () => {
-    // console.log("scrollTop: ", event.currentTarget.scrollTop);
-    // console.log("offsetHeight: ", event.currentTarget.offsetHeight);
-    setScrolle(
-      (document.currentTarget.scrollTop / document.currentTarget.offsetHeight) * 10
-    );
+    const winScroll = document.documentElement.scrollTop;
+    const height =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    setScrolle(scrolled);
   };
-  const [fix, setFix] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [fix]);
 
   if (typeof window !== "undefined") {
     const setFixedSidebar = () =>
       window.scrollY >= 400 ? setFix(true) : setFix(false);
 
     window.addEventListener("scroll", setFixedSidebar);
-
-
-    
   }
 
   return (
@@ -185,12 +188,6 @@ export default function Home() {
             <MarsRover dataForRender={dataForRender} />
           </div>
         </div>
-
-        <div
-          className={
-            isShow ? "sidebar__container--expand" : "sidebar__container"
-          }
-        ></div>
       </Layout>
     </>
   );

@@ -4,7 +4,7 @@ import { DayPicker, DayClickEventHandler } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 
 const MarsRover = ({ dataForRender }) => {
-  const size = 48;
+  const size = 68;
 
   return (
     <div className="grid">

@@ -1,4 +1,5 @@
-import styles from '../styles/header.module.css'
+import styles from "../styles/header.module.css";
+import MarsWeather from "./MarsWeather";
 
 const Header = () => {
   return (
@@ -10,6 +11,9 @@ const Header = () => {
         perferendis unde accusamus ipsum. Aliquid enim optio voluptatem aliquam
         pariatur? Saepe, dolore!
       </p>
+      <div className="grid">
+        <MarsWeather />
+      </div>
     </div>
   );
 };
