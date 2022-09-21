@@ -1,0 +1,32 @@
+.flex {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--min-item-width, 30ch), 1fr)
+  );
+  gap: var(--space-md);
+}
+
+
+.grid {
+display: grid;
+}
+
+.grid-center {
+place-content: center;
+}

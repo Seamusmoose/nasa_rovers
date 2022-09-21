@@ -1,0 +1,15 @@
+.content__container {
+}
+
+.right {
+  flex-grow: 5;
+  overflow: scroll;
+}
+
+.left {
+  flex-grow: 1;
+  background-color: white;
+  position: sticky;
+  width: 300px;
+}
+

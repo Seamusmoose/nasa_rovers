@@ -1,0 +1,13 @@
+.navbar {
+    padding: 1rem;
+    background-color: lightcoral;
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 0;
+  }
+  
+  .navbar__item {
+    padding: 0.5rem;
+  }

@@ -19,8 +19,6 @@ const MarsWeather = () => {
     fetchWeatherData();
   }, []);
 
-  console.log(weatherData, "WD");
-
   return (
     <>
       {/* <h1>Last recorded Mars Weather with Curiosty Rover</h1> */}
@@ -44,12 +42,9 @@ const MarsWeather = () => {
             sunset,
             min_gts_temp,
             max_gts_temp,
-
-
           }) => {
             return (
               <ul key={id} className="weather-item">
-                
                 <li>Earth date: {terrestrial_date}</li>
                 <li>Sol Date: {sol}</li>
                 <li>min temp: {min_temp}</li>

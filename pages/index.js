@@ -1,33 +1,196 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import NavBar from "../components/NavBar";
 import MarsRover from "../components/MarsRover";
 import MarsWeather from "../components/MarsWeather";
+import Navigator from "../components/Navigator";
+import { DayPicker, DayClickEventHandler } from "react-day-picker";
+import "react-day-picker/dist/style.css";
+import RoverCard from "../components/RoverCard";
+import styles from "../styles/index.module.css";
 
-export default function Home({}) {
+export default function Home() {
   const [isShow, setIsShow] = useState(false);
+
+  const size = 48;
+  const currentRovers = ["Curiosity", "Opportunity", "Spirit"];
+  const [selectedRover, selectedRoverSet] = useState(currentRovers[0]);
+
+  const [earthDate, earthDateSet] = useState();
+  const [manifestsData, manifestsDataSet] = useState();
+
+  useEffect(() => {
+    async function handleAsync() {
+      if (typeof selectedRover === "undefined") {
+        return;
+      }
+
+      const res = await fetch(`/api/manifests?rover=${selectedRover}`);
+
+      if (!res.ok) {
+        console.error(await res.json());
+        return;
+      }
+
+      const data = await res.json();
+
+      const { photos, max_date } = data.photo_manifest;
+
+      earthDateSet(max_date);
+
+      const latestPhotoManifest = photos[photos.length - 1];
+
+      manifestsDataSet(latestPhotoManifest);
+    }
+    handleAsync();
+  }, [selectedRover]);
+
+  const [selectedCamera, selectedCameraSet] = useState("");
+  const [availableCameras, availableCamerasSet] = useState([]);
+
+  const [roverData, setRoverData] = useState([]);
+  useEffect(() => {
+    async function handleAsync() {
+      if (typeof earthDate === "undefined" || earthDate === "") {
+        return;
+      }
+
+      const res = await fetch(
+        `/api/rovers?rover=${selectedRover}&earth_date=${earthDate}`
+      );
+
+      if (!res.ok) {
+        console.error(await res.json());
+        return;
+      }
+
+      const { photos } = await res.json();
+
+      const availableCameras = photos.map((i) => i.camera.name);
+      const uniqueAvailableCameras = [...new Set(availableCameras)];
+
+      availableCamerasSet(uniqueAvailableCameras);
+      selectedCameraSet(uniqueAvailableCameras[0]);
+
+      setRoverData(photos);
+    }
+    handleAsync();
+  }, [selectedRover, earthDate]);
+
+  const getRoverDateMin = () => {
+    switch (selectedRover) {
+      case "Curiosity":
+        return "2012-08-06";
+      case "Opportunity":
+        return "2004-01-26";
+      case "Spirit":
+        return "2004-01-05";
+      default:
+        return "2012-08-06";
+    }
+  };
+
+  const getRoverDateMax = () => {
+    switch (selectedRover) {
+      case "Curiosity":
+        return (
+          manifestsData?.earth_date || new Date().toISOString().slice(0, 10)
+        );
+      case "Opportunity":
+        return "2018-06-11";
+      case "Spirit":
+        return "2010-03-22";
+      default:
+        return (
+          manifestsData?.earth_date || new Date().toISOString().slice(0, 10)
+        );
+    }
+  };
+
+  const handleDayClick = (day) => {
+    const localConversion = new Date(
+      day.getTime() - day.getTimezoneOffset() * 60000
+    );
+    setSelectedDay(localConversion.toISOString().slice(0, 10));
+    earthDateSet(localConversion.toISOString().slice(0, 10));
+  };
+
+  const disabledDays = [
+    {
+      from: new Date(-8640000000000000),
+      to: new Date(getRoverDateMin()),
+    },
+    {
+      from: new Date(getRoverDateMax()),
+      to: new Date(`December 22, 9999 04:00:00`),
+    },
+  ];
+
+  const dataForRender = [
+    ...roverData.filter((el) => el.camera.name === selectedCamera),
+  ];
+
+  const currentPropsDate = new Date(earthDate);
+  const [month, setMonth] = useState();
+  const [selectedDay, setSelectedDay] = useState();
+
+  useEffect(() => {
+    setMonth(currentPropsDate);
+  }, [earthDate]);
+
+  const [scrolle, setScrolle] = useState(0);
+
+  const handleScroll = () => {
+    // console.log("scrollTop: ", event.currentTarget.scrollTop);
+    // console.log("offsetHeight: ", event.currentTarget.offsetHeight);
+    setScrolle(
+      (document.currentTarget.scrollTop / document.currentTarget.offsetHeight) * 10
+    );
+  };
+  const [fix, setFix] = useState(false);
+
+  if (typeof window !== "undefined") {
+    const setFixedSidebar = () =>
+      window.scrollY >= 400 ? setFix(true) : setFix(false);
+
+    window.addEventListener("scroll", setFixedSidebar);
+
+
+    
+  }
 
   return (
     <>
-      <NavBar setIsShow={setIsShow} />
-
       <Layout>
-        <div className="content__container">
-          <MarsRover />
+        <div className={`${styles.content_container} flex`}>
+          <div className={fix ? "sidebar fixed" : "sidebar"}>
+            <Navigator
+              selectedRover={selectedRover}
+              selectedRoverSet={selectedRoverSet}
+              currentRovers={currentRovers}
+              selectedCamera={selectedCamera}
+              availableCameras={availableCameras}
+              selectedCameraSet={selectedCameraSet}
+              handleDayClick={handleDayClick}
+              disabledDays={disabledDays}
+              month={month}
+              setMonth={setMonth}
+              scrolle={scrolle}
+            />
+          </div>
+
+          <div onScroll={handleScroll} className={styles.right}>
+            <MarsRover dataForRender={dataForRender} />
+          </div>
         </div>
 
         <div
           className={
             isShow ? "sidebar__container--expand" : "sidebar__container"
           }
-        >
-          <button onClick={() => setIsShow(false)}>close</button>
-
-          <div className="weather__container">{<MarsWeather />}</div>
-        </div>
+        ></div>
       </Layout>
     </>
   );
