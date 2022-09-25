@@ -1,5 +1,6 @@
 :root {
   --min-item-width: 30ch;
+  --min-item-width-grid: 10ch;
 
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -101,13 +102,57 @@ select {
 
 .sidebar.fixed {
   position: sticky;
-  top: 6%;
-  /* margin-top: 3rem; */
+  top: 0;
   z-index: 1;
   background-color: white;
   height: 100vh;
+  padding-top: 0;
 }
 
-.weather_grid {
-  display: grid;
+.weather_container {
+  position: relative;
+  z-index: 2;
+  width: 99vw;
+  /* overflow: scroll; */
+}
+
+.weather_container.w-fixed {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: white;
+  padding-top: 0;
+}
+
+.weather-item > li {
+  width: 80px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 400px) {
+  .sidebar {
+    height: 40vh;
+  }
+
+  .sidebar.fixed {
+    position: sticky;
+    top: 0;
+    height: 40vh;
+    z-index: 1;
+  }
+
+  .weather_container {
+    overflow: scroll;
+    height: 20vh;
+  }
+
+  .weather_container.w-fixed {
+    position: relative;
+  }
+
+  .responsive {
+    flex-direction: column;
+  }
 }

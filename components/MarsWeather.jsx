@@ -45,12 +45,12 @@ const MarsWeather = () => {
           }) => {
             return (
               <ul key={id} className="weather-item">
-                <li>Earth date: {terrestrial_date}</li>
-                <li>Sol Date: {sol}</li>
-                <li>min temp: {min_temp}</li>
-                <li>Max temp: {max_temp}</li>
-                <li>sunrise: {sunrise}</li>
-                <li>sunset: {sunset}</li>
+                <li> {terrestrial_date}</li>
+                <li> {sol}</li>
+                <li> {min_temp}</li>
+                <li> {max_temp}</li>
+                <li> {sunrise}</li>
+                <li> {sunset}</li>
               </ul>
             );
           }

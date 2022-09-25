@@ -6,10 +6,15 @@
   overflow: scroll;
 }
 
-.left {
+/* .left {
   flex-grow: 1;
   background-color: white;
   position: sticky;
   width: 300px;
-}
+} */
 
+
+
+@media (max-width: 400px) {
+
+}

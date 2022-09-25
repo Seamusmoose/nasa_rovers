@@ -8,6 +8,9 @@
 
 .column {
   flex-direction: column;
+}
+
+.center {
   justify-content: center;
   align-items: center;
 }
@@ -22,11 +25,24 @@
   gap: var(--space-md);
 }
 
-
 .grid {
-display: grid;
+  display: grid;
 }
 
 .grid-center {
-place-content: center;
+  place-content: center;
+}
+
+@media (max-width: 400px) {
+  .flex {
+    display: flex;
+    width: 100%;
+  }
+
+  .grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px);
+    gap: var(--space-md);
+  }
 }

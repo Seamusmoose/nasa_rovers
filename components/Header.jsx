@@ -1,20 +1,21 @@
+import Image from "next/image";
 import styles from "../styles/header.module.css";
-import MarsWeather from "./MarsWeather";
+import marsStation from "../public/station2.png";
 
 const Header = () => {
   return (
-    <div className={styles.header}>
-      <h1>Header</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-        voluptatem necessitatibus tempore natus, sint quae facilis modi corrupti
-        perferendis unde accusamus ipsum. Aliquid enim optio voluptatem aliquam
-        pariatur? Saepe, dolore!
-      </p>
-      <div className="grid">
-        <MarsWeather />
+    <>
+      <div className={`${styles.header} flex`}>
+        <Image src={marsStation} height={500} width={600} />
+
+        <p className={`${styles.text} flex center`}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          voluptatem necessitatibus tempore natus, sint quae facilis modi
+          corrupti perferendis unde accusamus ipsum. Aliquid enim optio
+          voluptatem aliquam pariatur? Saepe, dolore!
+        </p>
       </div>
-    </div>
+    </>
   );
 };
 

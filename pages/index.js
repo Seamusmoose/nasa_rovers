@@ -165,30 +165,35 @@ export default function Home() {
   }
 
   return (
-    <>
-      <Layout>
-        <div className={`${styles.content_container} flex`}>
-          <div className={fix ? "sidebar fixed" : "sidebar"}>
-            <Navigator
-              selectedRover={selectedRover}
-              selectedRoverSet={selectedRoverSet}
-              currentRovers={currentRovers}
-              selectedCamera={selectedCamera}
-              availableCameras={availableCameras}
-              selectedCameraSet={selectedCameraSet}
-              handleDayClick={handleDayClick}
-              disabledDays={disabledDays}
-              month={month}
-              setMonth={setMonth}
-              scrolle={scrolle}
-            />
-          </div>
-
-          <div onScroll={handleScroll} className={styles.right}>
-            <MarsRover dataForRender={dataForRender} />
-          </div>
+    <Layout>
+      <div
+        className={
+          fix ? " flex weather_container w-fixed" : " flex weather_container"
+        }
+      >
+        <MarsWeather />
+      </div>
+      <div className="flex responsive">
+        <div className={fix ? "sidebar fixed row" : "sidebar row"}>
+          <Navigator
+            selectedRover={selectedRover}
+            selectedRoverSet={selectedRoverSet}
+            currentRovers={currentRovers}
+            selectedCamera={selectedCamera}
+            availableCameras={availableCameras}
+            selectedCameraSet={selectedCameraSet}
+            handleDayClick={handleDayClick}
+            disabledDays={disabledDays}
+            month={month}
+            setMonth={setMonth}
+            scrolle={scrolle}
+          />
         </div>
-      </Layout>
-    </>
+
+        <div onScroll={handleScroll} className={styles.right}>
+          <MarsRover dataForRender={dataForRender} />
+        </div>
+      </div>
+    </Layout>
   );
 }

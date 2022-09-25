@@ -19,34 +19,35 @@ const Navigator = ({
 }) => {
   return (
     <>
-    <div className={styles.animation_container}>
-    <PlanetAnimation scrolle={scrolle} />
-    </div>
-    
-      <select
-        name="rover-select"
-        value={selectedRover}
-        onChange={(e) => selectedRoverSet(e.currentTarget.value)}
-      >
-        <option value="">Select a rover</option>
-        {currentRovers.map((rover) => (
-          <option key={rover} value={rover}>
-            {rover}
-          </option>
-        ))}
-      </select>
-      <select
-        name="camera-select"
-        value={selectedCamera}
-        onChange={(e) => selectedCameraSet(e.currentTarget.value)}
-      >
-        <option value="">Select a camera</option>
-        {availableCameras.map((camera) => (
-          <option key={camera} value={camera}>
-            {camera}
-          </option>
-        ))}
-      </select>
+      <div>
+        <PlanetAnimation scrolle={scrolle} />
+        <div className="flex column center">
+          <select
+            name="rover-select"
+            value={selectedRover}
+            onChange={(e) => selectedRoverSet(e.currentTarget.value)}
+          >
+            <option value="">Select a rover</option>
+            {currentRovers.map((rover) => (
+              <option key={rover} value={rover}>
+                {rover}
+              </option>
+            ))}
+          </select>
+          <select
+            name="camera-select"
+            value={selectedCamera}
+            onChange={(e) => selectedCameraSet(e.currentTarget.value)}
+          >
+            <option value="">Select a camera</option>
+            {availableCameras.map((camera) => (
+              <option key={camera} value={camera}>
+                {camera}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
 
       <DayPicker
         mode="single"
