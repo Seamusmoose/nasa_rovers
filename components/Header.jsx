@@ -5,7 +5,7 @@ import marsStation from "../public/station2.png";
 const Header = () => {
   return (
     <>
-      <div className={`${styles.header} flex`}>
+      <div className={`${styles.header} flex responsive-col`}>
         <Image src={marsStation} height={500} width={600} />
 
         <p className={`${styles.text} flex center`}>

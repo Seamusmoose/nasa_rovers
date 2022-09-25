@@ -48,18 +48,19 @@ const Navigator = ({
           </select>
         </div>
       </div>
-
-      <DayPicker
-        mode="single"
-        utcOffset={0}
-        dateFormat="DD-MMM HH:mm"
-        onDayClick={handleDayClick}
-        disabled={disabledDays}
-        // selected={selectedDay}
-        // onSelect={setSelectedDay}
-        month={month}
-        onMonthChange={setMonth}
-      />
+      <div className="relative">
+        <DayPicker
+          mode="single"
+          utcOffset={0}
+          dateFormat="DD-MMM HH:mm"
+          onDayClick={handleDayClick}
+          disabled={disabledDays}
+          // selected={selectedDay}
+          // onSelect={setSelectedDay}
+          month={month}
+          onMonthChange={setMonth}
+        />
+      </div>
     </>
   );
 };

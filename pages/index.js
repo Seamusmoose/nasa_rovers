@@ -173,7 +173,7 @@ export default function Home() {
       >
         <MarsWeather />
       </div>
-      <div className="flex responsive">
+      <div className="flex responsive-col t">
         <div className={fix ? "sidebar fixed row" : "sidebar row"}>
           <Navigator
             selectedRover={selectedRover}
@@ -190,7 +190,7 @@ export default function Home() {
           />
         </div>
 
-        <div onScroll={handleScroll} className={styles.right}>
+        <div onScroll={handleScroll} className="grow-two">
           <MarsRover dataForRender={dataForRender} />
         </div>
       </div>
