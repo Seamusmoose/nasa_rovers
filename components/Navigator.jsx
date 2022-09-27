@@ -16,6 +16,7 @@ const Navigator = ({
   month,
   setMonth,
   scrolle,
+  selectedDay,
 }) => {
   return (
     <>
@@ -48,14 +49,14 @@ const Navigator = ({
           </select>
         </div>
       </div>
-      <div className="relative">
+      <div>
         <DayPicker
           mode="single"
           utcOffset={0}
           dateFormat="DD-MMM HH:mm"
           onDayClick={handleDayClick}
           disabled={disabledDays}
-          // selected={selectedDay}
+          selected={selectedDay}
           // onSelect={setSelectedDay}
           month={month}
           onMonthChange={setMonth}

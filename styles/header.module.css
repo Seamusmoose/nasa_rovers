@@ -1,7 +1,10 @@
 .header {
-  background-color: lightcoral;
+  background-color: var(--light-1);
+  min-height: 100vh;
+  padding-bottom: 2.5rem;
 }
 
 .text {
   width: 400px;
+  color: var(--dark-2);
 }

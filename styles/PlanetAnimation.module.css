@@ -23,7 +23,7 @@
 .circle_inner_inner {
   display: grid;
   place-content: center;
-  background-color: white;
+  background-color: var(--med-1);
   border-radius: 50%;
   width: 150px;
   height: 150px;

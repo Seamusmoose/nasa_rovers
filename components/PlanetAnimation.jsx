@@ -1,5 +1,5 @@
 import Image from "next/image";
-import RoverPlc from "../public/placeholderr.jpeg";
+import RoverPlc from "../public/placeholderr.png";
 import styles from "../styles/PlanetAnimation.module.css";
 
 const PlanetAnimation = ({ scrolle }) => {

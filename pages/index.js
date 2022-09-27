@@ -48,6 +48,7 @@ export default function Home() {
   const [availableCameras, availableCamerasSet] = useState([]);
 
   const [roverData, setRoverData] = useState([]);
+
   useEffect(() => {
     async function handleAsync() {
       if (typeof earthDate === "undefined" || earthDate === "") {
@@ -70,6 +71,7 @@ export default function Home() {
 
       availableCamerasSet(uniqueAvailableCameras);
       selectedCameraSet(uniqueAvailableCameras[0]);
+      earthDateSet(earthDate);
 
       setRoverData(photos);
     }
@@ -113,6 +115,8 @@ export default function Home() {
     setSelectedDay(localConversion.toISOString().slice(0, 10));
     earthDateSet(localConversion.toISOString().slice(0, 10));
   };
+
+  console.log(new Date(getRoverDateMax()), "g");
 
   const disabledDays = [
     {
@@ -168,13 +172,16 @@ export default function Home() {
     <Layout>
       <div
         className={
-          fix ? " flex weather_container w-fixed" : " flex weather_container"
+          fix
+            ? " flex center weather_container w-fixed"
+            : " flex center weather_container"
         }
       >
         <MarsWeather />
       </div>
-      <div className="flex responsive-col t">
-        <div className={fix ? "sidebar fixed row" : "sidebar row"}>
+
+      <div className="flex responsive-col">
+        <div className={fix ? "flex sidebar fixed row" : "flex sidebar row"}>
           <Navigator
             selectedRover={selectedRover}
             selectedRoverSet={selectedRoverSet}
@@ -190,7 +197,7 @@ export default function Home() {
           />
         </div>
 
-        <div onScroll={handleScroll} className="grow-two">
+        <div onScroll={handleScroll} className="grow-two light-1">
           <MarsRover dataForRender={dataForRender} />
         </div>
       </div>

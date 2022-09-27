@@ -19,6 +19,9 @@
   flex-grow: 1;
 }
 
+.space-between {
+  justify-content: space-between;
+}
 .relative {
   position: relative;
 }
@@ -33,12 +36,20 @@
   gap: var(--space-md);
 }
 
-.grid {
-  display: grid;
-}
-
 .grid-center {
   place-content: center;
+}
+
+.dark-2 {
+  background-color: var(--dark-2);
+}
+
+.light-1 {
+  background-color: var(--light-1);
+}
+
+.marg-4 {
+margin: 4rem;
 }
 
 @media (max-width: 600px) {

@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import Cel from "../public/9254126_celcius_temprature_degrees_celsius_thermometer_icon.svg";
+import Earth from "../public/1715795_earth_planet_space_icon.svg";
+import Mars from "../public/1715796_mars_planet_space_icon.svg";
+import Sunrise from "../public/1530387_weather_morning_sun_sunrise_icon.svg";
+import Sunset from "../public/1530384_weather_evening_sun_sunset_icon.svg";
 
 const MarsWeather = () => {
   const [weatherData, setWeatherData] = useState([]);
@@ -43,14 +49,34 @@ const MarsWeather = () => {
             min_gts_temp,
             max_gts_temp,
           }) => {
+            const convertedDate = new Date(terrestrial_date)
+              .toUTCString()
+              .split(" ")
+              .map((i) => i)
+              .slice(0, 4)
+              .join(" ");
+
             return (
               <ul key={id} className="weather-item">
-                <li> {terrestrial_date}</li>
-                <li> {sol}</li>
-                <li> {min_temp}</li>
-                <li> {max_temp}</li>
-                <li> {sunrise}</li>
-                <li> {sunset}</li>
+                <li className="flex space-between">
+                  {convertedDate}
+                  <Image src={Earth} width="40px" height="40px" />
+                </li>
+                <li className="flex space-between">
+                  {sol} <Image src={Mars} width="30px" height="30px" />
+                </li>
+                <li className="flex space-between">
+                  {min_temp} <Image src={Cel} width="20px" height="20px" />
+                </li>
+                <li className="flex space-between">
+                  {max_temp} <Image src={Cel} width="20px" height="20px" />
+                </li>
+                <li className="flex space-between">
+                  {sunrise} <Image src={Sunrise} width="40px" height="40px" />
+                </li>
+                <li className="flex space-between">
+                  {sunset} <Image src={Sunset} width="40px" height="40px" />
+                </li>
               </ul>
             );
           }
