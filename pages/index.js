@@ -10,6 +10,7 @@ import { DayPicker, DayClickEventHandler } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import RoverCard from "../components/RoverCard";
 import styles from "../styles/index.module.css";
+import addDays from "date-fns/addDays";
 
 export default function Home() {
   const currentRovers = ["Curiosity", "Opportunity", "Spirit"];
@@ -91,20 +92,40 @@ export default function Home() {
     }
   };
 
+  const [earthDateforCalendar, setearthDateforCalendar] = useState();
+
+  useEffect(() => {
+    async function handleAsync() {
+      if (
+        typeof manifestsData?.earth_date === "undefined" ||
+        manifestsData?.earth_date === NaN
+      ) {
+        return;
+      }
+      const initialDate = new Date(manifestsData?.earth_date);
+      const nextDate = new Date(manifestsData?.earth_date).setDate(
+        initialDate.getDate() + 1
+      );
+
+      const earthDateAmended = new Date(nextDate).toISOString().slice(0, 10);
+
+      setearthDateforCalendar(earthDateAmended);
+    }
+    handleAsync();
+  }, [manifestsData?.earth_date]);
+
+  console.log(earthDateforCalendar);
+
   const getRoverDateMax = () => {
     switch (selectedRover) {
       case "Curiosity":
-        return (
-          manifestsData?.earth_date || new Date().toISOString().slice(0, 10)
-        );
+        return earthDateforCalendar || new Date().toISOString().slice(0, 10);
       case "Opportunity":
         return "2018-06-11";
       case "Spirit":
         return "2010-03-22";
       default:
-        return (
-          manifestsData?.earth_date || new Date().toISOString().slice(0, 10)
-        );
+        return earthDateforCalendar || new Date().toISOString().slice(0, 10);
     }
   };
 
@@ -116,7 +137,7 @@ export default function Home() {
     earthDateSet(localConversion.toISOString().slice(0, 10));
   };
 
-  console.log(new Date(getRoverDateMax()), "g");
+  // console.log(new Date(getRoverDateMax()), "g");
 
   const disabledDays = [
     {
