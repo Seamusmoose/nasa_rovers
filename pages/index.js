@@ -13,7 +13,7 @@ import styles from "../styles/index.module.css";
 import addDays from "date-fns/addDays";
 
 export default function Home() {
-  const currentRovers = ["Curiosity", "Opportunity", "Spirit"];
+  const currentRovers = ["Curiosity", "Opportunity", "Spirit", "Perseverance"];
   const [selectedRover, selectedRoverSet] = useState(currentRovers[0]);
 
   const [earthDate, earthDateSet] = useState();
@@ -202,7 +202,10 @@ export default function Home() {
       </div>
 
       <div className="flex responsive-col">
-        <div className={fix ? "flex sidebar fixed row" : "flex sidebar row"}>
+        <div
+          id="content"
+          className={fix ? "flex sidebar fixed row" : "flex sidebar row"}
+        >
           <Navigator
             selectedRover={selectedRover}
             selectedRoverSet={selectedRoverSet}

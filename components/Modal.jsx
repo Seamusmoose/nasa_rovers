@@ -6,7 +6,7 @@ export const Modal = ({ open, onClose, children }) => {
   return (
     <dialog open className={styles.overlay}>
       <div className={styles.button_container}>
-        <button onClick={onClose}>close Modal</button>
+        <button onClick={onClose}>X</button>
       </div>
       <div className={styles.modal_container}>{children}</div>
     </dialog>

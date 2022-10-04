@@ -57,27 +57,27 @@ const MarsWeather = () => {
               .join(" ");
 
             return (
-              <ul key={id} className="weather-item">
-                <li className="flex space-between">
+              <div key={id} className="weather-item">
+                <div className="flex space-between">
                   {convertedDate}
-                  <Image src={Earth} width="40px" height="40px" />
-                </li>
-                <li className="flex space-between">
+                  <Image  src={Earth} width="50px" height="50px" />
+                </div>
+                <div className="flex space-between">
                   {sol} <Image src={Mars} width="30px" height="30px" />
-                </li>
-                <li className="flex space-between">
+                </div>
+                <div className="flex space-between pad-right1">
                   {min_temp} <Image src={Cel} width="20px" height="20px" />
-                </li>
-                <li className="flex space-between">
+                </div>
+                <div className="flex space-between pad-right1">
                   {max_temp} <Image src={Cel} width="20px" height="20px" />
-                </li>
-                <li className="flex space-between">
+                </div>
+                <div className="flex space-between">
                   {sunrise} <Image src={Sunrise} width="40px" height="40px" />
-                </li>
-                <li className="flex space-between">
+                </div>
+                <div className="flex space-between">
                   {sunset} <Image src={Sunset} width="40px" height="40px" />
-                </li>
-              </ul>
+                </div>
+              </div>
             );
           }
         )

@@ -107,7 +107,7 @@ select {
 }
 
 .sidebar {
-  z-index: 1;
+  /* z-index: ; */
   background-color: var(--med-1);
   height: 100vh;
   display: flex;
@@ -120,7 +120,8 @@ select {
 
 .sidebar.fixed {
   position: sticky;
-  top: 6%;
+  overflow: visible;
+  top: 8%;
   z-index: 1;
   background-color: var(--med-1);
   height: 100vh;
@@ -145,13 +146,12 @@ select {
 
 .weather-item {
   background-color: var(--light-2);
+
 }
 
 .weather-item > li {
   font-size: small;
   width: 80px;
-  margin: 0;
-  padding: 0;
   list-style: none;
   color: var(--dark-2);
 }
