@@ -58,9 +58,9 @@ const MarsWeather = () => {
 
             return (
               <div key={id} className="weather-item">
-                <div className="flex space-between">
+                <div className="flex space-between onMediaSpace">
                   {convertedDate}
-                  <Image  src={Earth} width="50px" height="50px" />
+                  <Image src={Earth} width="50px" height="50px" />
                 </div>
                 <div className="flex space-between">
                   {sol} <Image src={Mars} width="30px" height="30px" />

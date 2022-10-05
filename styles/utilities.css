@@ -81,7 +81,6 @@
   margin: 4rem;
 }
 
-
 @media (max-width: 900px) {
   .flex {
     display: flex;
@@ -94,5 +93,9 @@
     grid-template-columns: repeat(auto-fill, 100px);
     gap: var(--space-md);
     width: 100%;
+  }
+
+  .onMediaSpace {
+    width: 100px;
   }
 }

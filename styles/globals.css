@@ -116,18 +116,18 @@ select {
   align-items: center;
   gap: 10px;
   padding: 20px;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 
 .sidebar.fixed {
   position: sticky;
-  overflow: visible;
+  /* overflow: visible; */
   top: 8%;
   z-index: 1;
   background-color: var(--med-1);
   height: 100vh;
   padding-top: 0;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 
 .weather_container {
@@ -182,9 +182,13 @@ select {
 
   .weather_container {
     overflow: scroll;
-    height: 20vh;
-    width: 100%;
-    background-color: blue;
+    height: 40vh;
+    width: 100vw;
+  }
+
+  .weather-item {
+    background-color: var(--light-2);
+    padding: 2rem;
   }
 
   .weather_container.w-fixed {
