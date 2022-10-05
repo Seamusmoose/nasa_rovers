@@ -205,7 +205,7 @@ export default function Home() {
       <div className="flex responsive-col">
         <div
           id="content"
-          className={fix ? "flex sidebar fixed column" : "flex sidebar column"}
+          className={fix ? "flex sidebar fixed row" : "flex sidebar row"}
         >
           <Navigator
             selectedRover={selectedRover}

@@ -6,5 +6,6 @@
 
 .text {
   width: 400px;
+  padding: 2rem;
   color: var(--dark-2);
 }
