@@ -1,5 +1,6 @@
 .animation_container {
   padding-bottom: 80px;
+  display: block;
 }
 
 .circle {
@@ -27,4 +28,14 @@
   border-radius: 50%;
   width: 150px;
   height: 150px;
+}
+
+@media (max-width: 900px) {
+  .animation_container {
+    padding-bottom: 80px;
+    display: none;
+    
+  }
+
+
 }

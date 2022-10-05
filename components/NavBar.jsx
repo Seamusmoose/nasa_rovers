@@ -10,10 +10,13 @@ const NavBar = () => {
     <>
       <div className={styles.navbar}>
         <Link href="/about">
-          <a className={styles.nav_buttons}>About</a>
+          <a className={styles.nav_buttons}>Rover Camera Specs</a>
         </Link>
         <Link href="#content">
           <a className={styles.nav_buttons}>Images</a>
+        </Link>
+        <Link href="#weather">
+          <a className={styles.nav_buttons}>Weather</a>
         </Link>
       </div>
     </>

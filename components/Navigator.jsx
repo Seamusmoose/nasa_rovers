@@ -22,9 +22,9 @@ const Navigator = ({
     <>
       <div className="marg-top">
         <PlanetAnimation scrolle={scrolle} />
-        <div className="flex column center pad-2">
+        <div className="flex row center">
           <select
-          className="marg-5 light-1"
+            className="marg-5 light-1"
             name="rover-select"
             value={selectedRover}
             onChange={(e) => selectedRoverSet(e.currentTarget.value)}
@@ -37,7 +37,7 @@ const Navigator = ({
             ))}
           </select>
           <select
-          className="light-1"
+            className="light-1"
             name="camera-select"
             value={selectedCamera}
             onChange={(e) => selectedCameraSet(e.currentTarget.value)}

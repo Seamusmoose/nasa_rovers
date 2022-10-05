@@ -192,6 +192,7 @@ export default function Home() {
   return (
     <Layout>
       <div
+        id="weather"
         className={
           fix
             ? " flex center weather_container w-fixed"
@@ -204,7 +205,7 @@ export default function Home() {
       <div className="flex responsive-col">
         <div
           id="content"
-          className={fix ? "flex sidebar fixed row" : "flex sidebar row"}
+          className={fix ? "flex sidebar fixed column" : "flex sidebar column"}
         >
           <Navigator
             selectedRover={selectedRover}

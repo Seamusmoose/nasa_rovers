@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import "../styles/utilities.css";
+import "../styles/day-picker.css";
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {

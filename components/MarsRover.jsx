@@ -7,7 +7,7 @@ const MarsRover = ({ dataForRender }) => {
   const size = 200;
 
   return (
-    <div className="grid">
+    <div className="grid center">
       {dataForRender.length > 0 ? (
         dataForRender
           .slice(0, size)

@@ -116,6 +116,7 @@ select {
   align-items: center;
   gap: 10px;
   padding: 20px;
+  overflow: scroll;
 }
 
 .sidebar.fixed {
@@ -126,13 +127,14 @@ select {
   background-color: var(--med-1);
   height: 100vh;
   padding-top: 0;
+  overflow: scroll;
 }
 
 .weather_container {
   background-color: var(--light-2);
   position: relative;
   z-index: 2;
-  width: 99vw;
+  width: 100%;
   /* overflow: scroll; */
 }
 
@@ -142,11 +144,11 @@ select {
   top: 0;
   z-index: 2;
   padding-top: 0;
+  width: 100%;
 }
 
 .weather-item {
   background-color: var(--light-2);
-
 }
 
 .weather-item > li {
@@ -156,21 +158,33 @@ select {
   color: var(--dark-2);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+  html,
+  body {
+    width: 100%;
+    /* overflow-x: hidden; */
+  }
+
+  .onMedia {
+    width: 400px;
+  }
+
   .sidebar {
-    height: 40vh;
+    /* height: 40vh; */
   }
 
   .sidebar.fixed {
     position: sticky;
     top: 0;
-    height: 40vh;
+    height: 50vh;
     z-index: 1;
   }
 
   .weather_container {
     overflow: scroll;
     height: 20vh;
+    width: 100%;
+    background-color: blue;
   }
 
   .weather_container.w-fixed {
