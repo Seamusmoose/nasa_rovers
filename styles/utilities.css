@@ -77,6 +77,11 @@
   background-color: var(--light-1);
 }
 
+.font-light {
+  color: var(--yellow-t);
+  font-size: 12px;
+}
+
 .marg-4 {
   margin: 4rem;
 }
