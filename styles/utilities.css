@@ -81,6 +81,10 @@
   margin: 4rem;
 }
 
+.rowTocol {
+  flex-direction: row;
+}
+
 @media (max-width: 900px) {
   .flex {
     display: flex;
@@ -99,6 +103,7 @@
     width: 100px;
   }
 
-  .colToRow {
+  .rowTocol {
+    flex-direction: column;
   }
 }

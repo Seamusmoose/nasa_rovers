@@ -1,5 +1,8 @@
 .animation_container {
   padding-bottom: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .circle {
@@ -33,8 +36,5 @@
   .animation_container {
     padding-bottom: 80px;
     display: none;
-    
   }
-
-
 }
